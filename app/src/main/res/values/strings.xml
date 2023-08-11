@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">Goods</string>
+    <string name="costumer">costumer</string>
+    <string name="driver">driver</string>
+    <string name="registration_page">Registration page</string>
+    <string name="full_name">Full name</string>
+    <string name="email">Email</string>
+    <string name="mobile_number">Mobile number</string>
+    <string name="local_address">Local address</string>
+    <string name="id_proof">id proof</string>
+    <string name="licence">licence</string>
+    <string name="password">password</string>
+    <string name="confirm_password">confirm password</string>
+    <string name="save">save</string>
 </resources>

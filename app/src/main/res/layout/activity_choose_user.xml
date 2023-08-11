@@ -13,28 +13,35 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="268dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        tools:ignore="UselessParent">
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_customer"
             android:layout_width="330dp"
             android:layout_height="70dp"
             android:layout_gravity="center"
             android:background="@drawable/custom_btn"
-            android:text="costumer"
+            android:text="@string/costumer"
+            android:onClick="cRedirect"
             android:textAllCaps="true"
-            android:textSize="25sp" />
+            android:textSize="25sp"
+            android:textColor="@color/white"
+            tools:ignore="VisualLintButtonSize" />
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_driver"
             android:layout_width="330dp"
             android:layout_height="70dp"
             android:layout_gravity="center"
             android:layout_marginTop="50dp"
             android:background="@drawable/custom_btn"
-            android:text="driver"
+            android:text="@string/driver"
+            android:onClick="dRedirect"
             android:textAllCaps="true"
-            android:textSize="25sp" />
+            android:textSize="25sp"
+            android:textColor="@color/white"
+            tools:ignore="VisualLintButtonSize" />
 
 
     </LinearLayout>

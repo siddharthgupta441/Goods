@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".driver_register">
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingTop="30dp"
+        android:paddingBottom="70dp"
+        android:paddingStart="30dp"
+        android:paddingEnd="30dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/registration_page"
+            android:textSize="30sp"
+            android:fontFamily="@font/fonts"
+            android:textStyle="bold"
+            android:textColor="@color/primary_purple"
+            android:layout_gravity="center"
+            />
+
+        <EditText
+            android:id="@+id/driverR_name"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@drawable/edittext_grey"
+            android:hint="@string/full_name"
+            android:inputType="text"
+            android:paddingStart="4dp"
+            android:paddingEnd="3dp"
+            android:layout_marginTop="30dp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/grey"
+            tools:ignore="TextContrastCheck,VisualLintTextFieldSize"
+            android:autofillHints="" />
+
+        <EditText
+            android:id="@+id/driverR_email"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/edittext_grey"
+            android:hint="@string/email"
+            android:inputType="textEmailAddress"
+            android:paddingStart="4dp"
+            android:paddingEnd="3dp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/grey"
+            tools:ignore="TextContrastCheck,VisualLintTextFieldSize"
+            android:autofillHints="" />
+
+        <EditText
+            android:id="@+id/driverR_mobile"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/edittext_grey"
+            android:hint="@string/mobile_number"
+            android:inputType="number"
+            android:paddingStart="4dp"
+            android:paddingEnd="3dp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/grey"
+            tools:ignore="TextContrastCheck,VisualLintTextFieldSize"
+            android:autofillHints="" />
+
+        <EditText
+            android:id="@+id/driverR_address"
+            android:layout_width="match_parent"
+            android:layout_height="96dp"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/edittext_grey"
+            android:hint="@string/local_address"
+            android:inputType="textMultiLine"
+            android:paddingStart="4dp"
+            android:paddingEnd="3dp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/grey"
+            tools:ignore="TextContrastCheck,VisualLintTextFieldSize"
+            android:autofillHints="" />
+
+        <ImageView
+            android:id="@+id/driverR_id"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginTop="30dp"
+            android:src="@drawable/id_proof"
+            android:onClick="loadProof"
+            android:contentDescription="@string/id_proof"/>
+
+        <ImageView
+            android:id="@+id/driverR_dl"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginTop="30dp"
+            android:src="@drawable/driving_licence"
+            android:onClick="loadDL"
+            android:contentDescription="@string/licence"/>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:autofillHints=""
+            android:ems="10"
+            android:inputType="textPassword"
+            app:passwordToggleEnabled="true"
+            tools:ignore="TextContrastCheck"
+            tools:layout_editor_absoluteX="90dp"
+            tools:layout_editor_absoluteY="235dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/driverR_password"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:autofillHints=""
+                android:background="@drawable/edittext_grey"
+                android:ems="10"
+                android:hint="@string/password"
+                android:textColorHint="#2B2B2B"
+                android:textColor="@color/black"
+                android:inputType="textPassword"
+                android:paddingStart="4dp"
+                android:paddingEnd="3dp"
+                tools:ignore="TextContrastCheck,VisualLintTextFieldSize"
+                tools:layout_editor_absoluteX="110dp"
+                tools:layout_editor_absoluteY="84dp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/driverR_p_error"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/red"
+            android:textSize="15sp"
+            android:layout_gravity="center"/>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:autofillHints=""
+            android:ems="10"
+            android:inputType="textPassword"
+            app:passwordToggleEnabled="true"
+            tools:ignore="TextContrastCheck"
+            tools:layout_editor_absoluteX="90dp"
+            tools:layout_editor_absoluteY="235dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/driverR_Cpassword"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:autofillHints=""
+                android:background="@drawable/edittext_grey"
+                android:ems="10"
+                android:hint="@string/confirm_password"
+                android:textColorHint="#2B2B2B"
+                android:textColor="@color/black"
+                android:inputType="textPassword"
+                android:paddingStart="4dp"
+                android:paddingEnd="3dp"
+                tools:ignore="TextContrastCheck,VisualLintTextFieldSize"
+                tools:layout_editor_absoluteX="110dp"
+                tools:layout_editor_absoluteY="84dp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/driverR_c_error"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/red"
+            android:textSize="15sp"
+            android:layout_gravity="center"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/driverR_save_btn"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:text="@string/save"
+            android:textSize="28sp"
+            android:onClick="save"
+            android:textAllCaps="true"
+            android:background="@drawable/custom_btn"
+            android:layout_marginTop="30dp"
+            tools:ignore="VisualLintButtonSize" />
+
+    </LinearLayout>
+</ScrollView>

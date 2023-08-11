@@ -5,4 +5,6 @@
     <color name="primary_purple">#6200EE</color>
     <color name="blue">#3700B3</color>
     <color name="pink">#BB86FC</color>
+    <color name="red">#F44336</color>
+    <color name="grey">#757373</color>
 </resources>
