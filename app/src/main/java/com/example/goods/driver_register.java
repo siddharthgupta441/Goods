@@ -12,25 +12,20 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Base64;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
+import com.airbnb.lottie.LottieAnimationView;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreSettings;
-import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
 
 import java.io.ByteArrayOutputStream;
 import java.util.HashMap;
@@ -43,7 +38,8 @@ public class driver_register extends AppCompatActivity {
     private TextView pError, cError;
     private String Name, Email, Mobile, Add, Pass, cPass;
     private Uri proofImage;
-
+    private LottieAnimationView load;
+    private Button btn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,6 +57,10 @@ public class driver_register extends AppCompatActivity {
 
         pError = findViewById(R.id.driverR_p_error);
         cError = findViewById(R.id.driverR_c_error);
+
+        load = findViewById(R.id.DriverR_loading);
+
+        btn = findViewById(R.id.driverR_save_btn);
     }
     public void loadProof(View view) {
         Intent i = new Intent(Intent.ACTION_PICK);
@@ -70,8 +70,6 @@ public class driver_register extends AppCompatActivity {
     public void loadDL(View view) {
         Intent i = new Intent(Intent.ACTION_PICK);
         i.setData(MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        /*i.setType("image/*");
-        i.setAction(Intent.ACTION_GET_CONTENT);*/
         startActivityForResult(Intent.createChooser(i, "select Image"), 200);
     }
 
@@ -95,22 +93,59 @@ public class driver_register extends AppCompatActivity {
     }
 
     public void save(View view) {
+        btn.setVisibility(View.GONE);
+        load.setVisibility(View.VISIBLE);
+
         Name = name.getText().toString();
         Email = email.getText().toString();
         Mobile = mobile.getText().toString();
         Add = address.getText().toString();
         Pass = password.getText().toString();
         cPass = cPassword.getText().toString();
+
+        FirebaseDatabase db = FirebaseDatabase.getInstance();
+        DatabaseReference reference = db.getReference();
+        DatabaseReference myRef = reference.child("Driver");
+
+        myRef.orderByChild("Email").equalTo(Email).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                if(snapshot.exists()){
+                    btn.setVisibility(View.VISIBLE);
+                    load.setVisibility(View.GONE);
+                    Toast.makeText(driver_register.this, "Email is already registered.",
+                            Toast.LENGTH_LONG).show();
+                }
+                else userNotFound();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                btn.setVisibility(View.VISIBLE);
+                load.setVisibility(View.GONE);
+                Toast.makeText(driver_register.this, "something went wrong. try again after sometime.",
+                        Toast.LENGTH_LONG).show();
+            }
+        });
+
+    }
+    private void userNotFound(){
         if(!Pass.equals(cPass) || Pass.length() < 8 || Pass.length() > 16 ||
                 (!Pass.matches(".*[a-z].*") || !Pass.matches(".*[A-Z].*") ||
                         !Pass.matches(".*[0-9].*") || !Pass.matches(".*[@#$&].*"))){
+
+            btn.setVisibility(View.VISIBLE);
+            load.setVisibility(View.GONE);
+
             if(!Pass.equals(cPass)) cError.setText("password does not match.");
 
             if(Pass.length() < 8 || Pass.length() > 16) pError.setText("password must be 8-16 in length.");
 
             if(!Pass.matches(".*[a-z].*") || !Pass.matches(".*[A-Z].*") ||
                     !Pass.matches(".*[0-9].*") || !Pass.matches(".*[@#$&].*"))
-                pError.setText("password must contain at least one(Uppercase, Lowercase, number, special character i.e. @, #, $, &");
+                pError.setText("password must contain at least one(Uppercase, Lowercase, number, special" +
+                        " character i.e. @, #, $, &");
         }
         else{
             pError.setText("");
@@ -148,15 +183,20 @@ public class driver_register extends AppCompatActivity {
             reference.push().setValue(hs).addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
                 public void onSuccess(Void unused) {
+                    btn.setVisibility(View.VISIBLE);
+                    load.setVisibility(View.GONE);
                     Toast.makeText(driver_register.this, "uploaded", Toast.LENGTH_SHORT).show();
+                    finish();
+                    startActivity(new Intent(driver_register.this, driver_login.class));
                 }
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
+                    btn.setVisibility(View.VISIBLE);
+                    load.setVisibility(View.GONE);
                     Toast.makeText(driver_register.this, "failed", Toast.LENGTH_SHORT).show();
                 }
             });
         }
-
     }
 }

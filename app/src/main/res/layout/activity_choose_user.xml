@@ -16,32 +16,58 @@
         android:orientation="vertical"
         tools:ignore="UselessParent">
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_customer"
-            android:layout_width="330dp"
-            android:layout_height="70dp"
-            android:layout_gravity="center"
-            android:background="@drawable/custom_btn"
-            android:text="@string/costumer"
-            android:onClick="cRedirect"
-            android:textAllCaps="true"
-            android:textSize="25sp"
-            android:textColor="@color/white"
-            tools:ignore="VisualLintButtonSize" />
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_customer"
+                android:layout_width="330dp"
+                android:layout_height="70dp"
+                android:layout_gravity="center"
+                android:background="@drawable/custom_btn"
+                android:text="@string/costumer"
+                android:onClick="cRedirect"
+                android:textAllCaps="true"
+                android:textSize="25sp"
+                android:textColor="@color/white"
+                tools:ignore="VisualLintButtonSize" />
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/chooseUser_cLoading"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                app:lottie_loop="true"
+                app:lottie_autoPlay="true"
+                android:layout_marginTop="30dp"
+                app:lottie_rawRes="@raw/loading"
+                android:visibility="gone"/>
+        </FrameLayout>
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_driver"
-            android:layout_width="330dp"
-            android:layout_height="70dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="50dp"
-            android:background="@drawable/custom_btn"
-            android:text="@string/driver"
-            android:onClick="dRedirect"
-            android:textAllCaps="true"
-            android:textSize="25sp"
-            android:textColor="@color/white"
-            tools:ignore="VisualLintButtonSize" />
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp">
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_driver"
+                android:layout_width="330dp"
+                android:layout_height="70dp"
+                android:layout_gravity="center"
+                android:background="@drawable/custom_btn"
+                android:text="@string/driver"
+                android:onClick="dRedirect"
+                android:textAllCaps="true"
+                android:textSize="25sp"
+                android:textColor="@color/white"
+                tools:ignore="VisualLintButtonSize" />
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/chooseUser_dLoading"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                app:lottie_loop="true"
+                app:lottie_autoPlay="true"
+                android:layout_marginTop="30dp"
+                app:lottie_rawRes="@raw/loading"
+                android:visibility="gone"/>
+        </FrameLayout>
 
 
     </LinearLayout>
