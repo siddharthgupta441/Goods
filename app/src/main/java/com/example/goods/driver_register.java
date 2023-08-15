@@ -19,8 +19,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.airbnb.lottie.LottieAnimationView;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -183,11 +187,19 @@ public class driver_register extends AppCompatActivity {
             reference.push().setValue(hs).addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
                 public void onSuccess(Void unused) {
-                    btn.setVisibility(View.VISIBLE);
-                    load.setVisibility(View.GONE);
-                    Toast.makeText(driver_register.this, "uploaded", Toast.LENGTH_SHORT).show();
-                    finish();
-                    startActivity(new Intent(driver_register.this, driver_login.class));
+                    FirebaseAuth auth = FirebaseAuth.getInstance();
+                    auth.createUserWithEmailAndPassword(Email, Pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if(task.isSuccessful()){
+                                btn.setVisibility(View.VISIBLE);
+                                load.setVisibility(View.GONE);
+                                Toast.makeText(driver_register.this, "uploaded", Toast.LENGTH_SHORT).show();
+                                finish();
+                                startActivity(new Intent(driver_register.this, driver_login.class));
+                            }
+                        }
+                    });
                 }
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
